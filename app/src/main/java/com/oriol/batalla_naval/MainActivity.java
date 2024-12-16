@@ -37,22 +37,32 @@ public class MainActivity extends AppCompatActivity {
         gridLayout.setColumnCount(numColumnas);
         gridLayout.setRowCount(numFilas);
 
+        TextView view = new TextView(this);
+        view.setLayoutParams(new GridLayout.LayoutParams());
+        view.setGravity(Gravity.CENTER);
+        view.setText("esto es un texto de prueba");
+        view.setTextSize(16);
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        params.width = 0;
+        params.height = 0;
+        params.columnSpec = GridLayout.spec(0);
+        params.rowSpec = GridLayout.spec(0);
+        view.setLayoutParams(params);
+        
+
         //primer hem de definir les files i columnes (ABCD...) (1234...)
         for (int i = 0;i<numFilas;i++){
             for (int j = 0;j<numColumnas;j++){
-
                 if (i==0 || j==0){
                     afegirCella(gridLayout,i,j);
-
                 }else{
                     afegirBoto(gridLayout,i,j);
                 }
                 gridLayout.requestLayout();
-
-
-
             }
         }
+
+
     }
 
 
@@ -71,11 +81,14 @@ public class MainActivity extends AppCompatActivity {
             }
             cella.setGravity(Gravity.CENTER);
             cella.setTextSize(16);
+            cella.setTextColor(Color.BLACK);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = 0;
-            params.height = 0;
-            params.columnSpec = GridLayout.spec(columna);
-            params.rowSpec = GridLayout.spec(fila);
+            params.width = 1;
+            params.height = 1;
+            params.columnSpec = GridLayout.spec(columna,1f);
+            params.rowSpec = GridLayout.spec(fila,1f);
+            params.setMargins(2, 2, 2, 2);
+            cella.setBackgroundColor(Color.GREEN);
             cella.setLayoutParams(params);
         }
         gridLayout.addView(cella);
@@ -90,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         params.height = 0;
         params.columnSpec=GridLayout.spec(columna,1f);
         params.rowSpec=GridLayout.spec(fila,1f);
+        params.setMargins(2, 2, 2, 2);
         //les alpiquem al boto
         button.setLayoutParams(params);
         //indiquem que no tindra text i que el color sera blau, quan es premi el farem negre
